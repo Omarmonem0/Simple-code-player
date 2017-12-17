@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title>Code player</title>
+        <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+        <script src="jquery-ui/jquery-ui.js"></script>
+        <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+        <style type="text/css">
+            #bar{ 
+                background-color:#EEEEEE;
+                height: 50px;    
+                
+            }
+            body{
+                margin: 0;
+                padding: 0;
+            }
+            #title{
+                padding-left: 10px;
+                padding-top:6px ;
+                font-family:fantasy;
+                font-size: 150%; 
+               
+            }
+            .button{
+                font-family:monospace;
+                margin: 0;
+                
+            }
+            .widget{
+               margin-left: 500px;
+               margin-top: -40px;
+            }
+            .segment{
+                margin-top: 12px;
+                
+                width: 25%;
+                height:600px;
+                float: left;
+                resize: none;
+                
+                
+            }
+            iframe{
+                margin-top: 12px;
+                height:600px;
+                 float: left;
+            }
+            
+            
+        
+        </style>
+    
+    
+    </head>
+    <body>
+        <div id="bar">
+            <p id="title">CodePlayer</p>              
+        </div>
+        <div class="widget">
+            <button class="button">HTML</button>
+            <button class="button">CSS</button>
+            <button class="button">JavaScript</button>
+            <button class="button">OutPut</button>
+        </div>
+        <div>
+           <textarea name="Text1" cols="40" rows="5" class="segment" id="html"><p id="paragraph">HELLO WORLD</p></textarea>
+           <textarea name="Text1" cols="40" rows="5" class="segment" id="css">p{color: green;}</textarea>
+           <textarea name="Text1" cols="40" rows="5" class="segment" id="javascript">document.getElementById("paragraph").innerHTML="hello rob!";</textarea>
+           <iframe  id="output">output</iframe>
+        </div>
+    
+    
+    
+    
+    
+    
+    </body>
+    <script type="text/javascript">
+        function updateOutput(){
+            
+            $("#output").contents().find("html").html("<html><head><style type='text/css'>"+$("#css").val()+"</style></head><body>"+($("#html").val())+"</body>")   
+            document.getElementById("output").contentWindow.eval($("#javascript").val());
+        }
+        $( ".widget input[type=submit], .widget a, .widget button" ).button();
+        $(".button").hover(function(){
+                $(this).css("background-color", "grey");
+                }, function(){
+                $(this).css("background-color", "#EEEEEE");
+            });
+        $("#output").width(($(window)/2)-7);
+        updateOutput();
+       
+        $("textarea").on('change keyup paste', function() {
+            
+                updateOutput();
+
+            });
+        
+        
+        
+        
+    
+    
+    
+    </script>
+
+
+
+
+
+
+
+
+
+</html>
